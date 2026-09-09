@@ -49,7 +49,7 @@ module.exports = defineConfig([
   {
     files: ['projects/admin/**/*.ts'],
     rules: {
-      '@angular-es;int/component-selector': [
+      '@angular-eslint/component-selector': [
         'error',
         {
           type: 'element',
