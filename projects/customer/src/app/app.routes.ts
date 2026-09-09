@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { emailVerifiedGuard } from './core/guards/email-verified.guard';
 import { guestGuard } from './core/guards/guest.guard';
-import { CheckEmailComponent } from "./features/auth/check-email/check-email.component";
 
 export const routes: Routes = [
   {
