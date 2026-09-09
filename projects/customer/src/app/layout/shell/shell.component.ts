@@ -37,7 +37,7 @@ import { appConfig } from "../../core/config/app-config";
 
       .active {
         font-weight: 600;
-      },
+      }
     `,
   ]
 })
