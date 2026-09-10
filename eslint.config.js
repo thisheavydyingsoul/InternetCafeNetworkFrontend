@@ -23,14 +23,6 @@ module.exports = defineConfig([
           style: "camelCase",
         },
       ],
-      "@angular-eslint/component-selector": [
-        "error",
-        {
-          type: "element",
-          prefix: "app",
-          style: "kebab-case",
-        },
-      ],
     },
   },
   {
@@ -41,4 +33,30 @@ module.exports = defineConfig([
     ],
     rules: {},
   },
+  {
+    files: ['projects/customer/**/*.ts'],
+    rules: {
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'app',
+          style: 'kebab-case'
+        }
+      ]
+    }
+  },
+  {
+    files: ['projects/admin/**/*.ts'],
+    rules: {
+      '@angular-eslint/component-selector': [
+        'error',
+        {
+          type: 'element',
+          prefix: 'admin',
+          style: 'kebab-case'
+        }
+      ]
+    }
+  }
 ]);
