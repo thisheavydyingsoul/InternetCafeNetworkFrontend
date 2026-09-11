@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "polyfills": "zone.js",
+            "polyfills": ["zone.js"],
             "browser": "projects/customer/src/main.ts",
             "tsConfig": "projects/customer/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -32,7 +32,6 @@
             ],
             "styles": ["projects/customer/src/styles.scss"]
           },
-
           "configurations": {
             "production": {
               "budgets": [
@@ -114,7 +113,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "polyfills": "zone.js",
+            "polyfills": ["zone.js"],
             "browser": "projects/admin/src/main.ts",
             "tsConfig": "projects/admin/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
