@@ -68,7 +68,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: CUSTOMER_IMAGE,ADMIN_IMAGE,GHCR_TOKEN,GHCR_USER,COMPOSE_FILE
+          envs: DEPLOY_PATH,CUSTOMER_IMAGE,ADMIN_IMAGE,GHCR_TOKEN,GHCR_USER,COMPOSE_FILE
           script: |
             cd "${DEPLOY_PATH}"
             git fetch origin "${{ inputs.ref }}"
