@@ -125,6 +125,8 @@
             ],
             "styles": ["projects/admin/src/styles.scss"]
           },
+          "polyfills":
+            "zone.js",
           "configurations": {
             "production": {
               "budgets": [
