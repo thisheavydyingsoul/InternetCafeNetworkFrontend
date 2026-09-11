@@ -124,10 +124,8 @@ jobs:
         run: |
           if [ "${{ github.ref_name }}" = "main" ]; then
             echo "BUILD_CONFIGURATION=production" >> "$GITHUB_ENV"
-          elif [ "${{ github.ref_name }}" = "dev" ]; then
-            echo "BUILD_CONFIGURATION=staging" >> "$GITHUB_ENV"
           else
-            echo "BUILD_CONFIGURATION=development" >> "$GITHUB_ENV"
+            echo "BUILD_CONFIGURATION=staging" >> "$GITHUB_ENV"
           fi
 
       - name: Log in to GHCR
