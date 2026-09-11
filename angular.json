@@ -31,6 +31,8 @@
             ],
             "styles": ["projects/customer/src/styles.scss"]
           },
+          "polyfills":
+            "zone.js",
           "configurations": {
             "production": {
               "budgets": [
@@ -123,6 +125,8 @@
             ],
             "styles": ["projects/admin/src/styles.scss"]
           },
+          "polyfills":
+            "zone.js",
           "configurations": {
             "production": {
               "budgets": [
