@@ -1,0 +1,96 @@
+name: Frontend deploy
+
+on:
+  workflow_call:
+    inputs:
+
+      image_tag:
+        description: Immutable frontend image tag
+        required: true
+        type: string
+
+      source_sha:
+        description: Commit SHA validated by CI
+        required: true
+        type: string
+
+      environment:
+        required: true
+        type: string
+
+      ref:
+        required: true
+        type: string
+
+    secrets:
+      SSH_HOST:
+        required: true
+      SSH_USER:
+        required: true
+      SSH_PRIVATE_KEY:
+        required: true
+      GHCR_TOKEN:
+        required: true
+      GHCR_USER:
+        required: true
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: frontend-${{ inputs.environment }}-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: frontend-deploy-${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout validated commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+
+      - name: Deploy to ${{ inputs.environment }} VM
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          CUSTOMER_IMAGE: ghcr.io/${{ github.repository_owner }}/internet-cafe-customer:${{ inputs.image_tag }}
+          ADMIN_IMAGE: ghcr.io/${{ github.repository_owner }}/internet-cafe-admin:${{ inputs.image_tag }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          GHCR_USER: ${{ secrets.GHCR_USER }}
+          COMPOSE_FILE: docker/docker-compose.${{ inputs.environment }}.yml
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: CUSTOMER_IMAGE,ADMIN_IMAGE,GHCR_TOKEN,GHCR_USER,COMPOSE_FILE
+          script: |
+            cd "${DEPLOY_PATH}"
+            git fetch origin "${{ inputs.ref }}"
+            git checkout "${{ inputs.source_sha }}"
+            bash deploy/scripts/deploy.sh
+
+  frontend-smoke:
+    name: frontend-smoke
+    runs-on: ubuntu-latest
+    needs: deploy
+    environment:
+      name: ${{ inputs.environment }}
+
+    steps:
+      - name: Smoke check via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -euo pipefail
+            curl --fail --show-error --retry 5 --retry-delay 5 http://localhost:4200/
+            curl --fail --show-error --retry 5 --retry-delay 5 http://localhost:4300/
+            echo "Frontend smoke OK"
+
