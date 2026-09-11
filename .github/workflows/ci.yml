@@ -146,7 +146,7 @@ jobs:
         with:
           context: .
           file: docker/customer/Dockerfile
-          push: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main')
+          push: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main') }}
           tags: ghcr.io/${{ github.repository_owner }}/internet-cafe-customer:${{ steps.meta.outputs.image_tag }}
           build-args: |
             BUILD_CONFIGURATION=${{ env.BUILD_CONFIGURATION }}
@@ -156,7 +156,7 @@ jobs:
         with:
           context: .
           file: docker/admin/Dockerfile
-          push: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main')
+          push: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main') }}
           tags: ghcr.io/${{ github.repository_owner }}/internet-cafe-admin:${{ steps.meta.outputs.image_tag }}
           build-args: |
             BUILD_CONFIGURATION=${{ env.BUILD_CONFIGURATION }}
