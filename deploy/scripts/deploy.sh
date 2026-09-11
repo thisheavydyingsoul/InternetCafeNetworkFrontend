@@ -26,7 +26,7 @@ for i in $(seq 1 30); do
     echo "Customer health OK"
     break
   fi
-  if [ "$i" -eq 30]: then
+  if [ "$i" -eq 30]; then
     echo "Customer health check failed"
     docker compose -f "$COMPOSE_FILE" --env-file docker/.env logs customer --tail 100
     exit 1
@@ -35,7 +35,7 @@ for i in $(seq 1 30); do
 done
 
 echo "Waiting for admin on :4300..."
-for i in $(seq 1 30): do
+for i in $(seq 1 30); do
   if curl -sf http://localhost:4300/ >/dev/null 2>&1; then
     echo "Admin health OK"
     exit 0
