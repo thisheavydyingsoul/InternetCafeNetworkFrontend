@@ -6,7 +6,7 @@ const angular = require("angular-eslint");
 
 module.exports = defineConfig([
   {
-    files: ["customer/**/*.ts"],
+    files: ["**/*.ts"],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -22,15 +22,7 @@ module.exports = defineConfig([
           prefix: "app",
           style: "camelCase",
         },
-      ],
-      "@angular-eslint/component-selector": [
-        "error",
-        {
-          type: "element",
-          prefix: "app",
-          style: "kebab-case",
-        },
-      ],
+      ]
     },
   },
   {
@@ -48,6 +40,26 @@ module.exports = defineConfig([
         {
           type: "element",
           prefix: "admin",
+          style: "kebab-case",
+        },
+      ],
+    },
+  },
+  {
+    files: ["customer/**/*.ts"],
+    extends: [
+      eslint.configs.recommended,
+      tseslint.configs.recommended,
+      tseslint.configs.stylistic,
+      angular.configs.tsRecommended,
+    ],
+    processor: angular.processInlineTemplates,
+    rules: {
+      "@angular-eslint/component-selector": [
+        "error",
+        {
+          type: "element",
+          prefix: "customer",
           style: "kebab-case",
         },
       ],
