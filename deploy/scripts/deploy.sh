@@ -35,7 +35,7 @@ for i in $(seq 1 30); do
 done
 
 echo "Waiting for admin on :4300..."
-for i in $(seq 1 30): do
+for i in $(seq 1 30); do
   if curl -sf http://localhost:4300/ >/dev/null 2>&1; then
     echo "Admin health OK"
     exit 0
