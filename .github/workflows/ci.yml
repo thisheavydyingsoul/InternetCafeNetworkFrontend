@@ -117,7 +117,7 @@ jobs:
       - name: Define immutable image tag
         id: meta
         shell: bash
-        run: echo "image_tag=sha-${GITHUB_SHA}" >> "$github_output"
+        run: echo "image_tag=sha-${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
 
       - name: Resolve Angular configuration
         shell: bash
