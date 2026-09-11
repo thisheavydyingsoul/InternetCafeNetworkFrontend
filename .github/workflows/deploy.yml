@@ -58,6 +58,7 @@ jobs:
       - name: Deploy to ${{ inputs.environment }} VM
         uses: appleboy/ssh-action@v1.2.0
         env:
+          DEPLOY_PATH: /opt/internet-cafe-frontend-${{ inputs.environment }}
           CUSTOMER_IMAGE: ghcr.io/${{ github.repository_owner }}/internet-cafe-customer:${{ inputs.image_tag }}
           ADMIN_IMAGE: ghcr.io/${{ github.repository_owner }}/internet-cafe-admin:${{ inputs.image_tag }}
           GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
