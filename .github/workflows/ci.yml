@@ -178,7 +178,7 @@ jobs:
     name: frontend-deploy
     if: >
       (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
-      (github.ref == 'refs/head/dev' || github.ref == 'refs/heads/main')
+      (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main')
     needs:
       - frontend-docker-build
       - frontend-security
