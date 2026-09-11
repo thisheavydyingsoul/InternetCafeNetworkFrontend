@@ -63,7 +63,7 @@ jobs:
           ADMIN_IMAGE: ghcr.io/${{ github.repository_owner }}/internet-cafe-admin:${{ inputs.image_tag }}
           GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
           GHCR_USER: ${{ secrets.GHCR_USER }}
-          COMPOSE_FILE: docker/docker-compose.${{ inputs.environment }}.yml
+          COMPOSE_FILE: docker/docker-compose.${{ inputs.environment }}.yaml
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
