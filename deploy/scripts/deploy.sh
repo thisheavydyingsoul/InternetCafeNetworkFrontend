@@ -7,6 +7,8 @@ set -euo pipefail
 : "${CUSTOMER_IMAGE:?CUSTOMER_IMAGE is required}"
 : "${ADMIN_IMAGE:?ADMIN_IMAGE is required}"
 
+PROJECT_NAME="internet-cafe-frontend-staging"
+
 cd "$DEPLOY_PATH"
 
 echo "Logging into GHCR..."
@@ -17,8 +19,13 @@ export CUSTOMER_IMAGE ADMIN_IMAGE
 echo "Deploying customer: ${CUSTOMER_IMAGE}"
 echo "Deploying admin: ${ADMIN_IMAGE}"
 
-docker compose -f "$COMPOSE_FILE" --env-file docker/.env pull customer admin
-docker compose -f "$COMPOSE_FILE" --env-file docker/.env up -d --remove-orphans customer admin
+docker compose -p "$PROJECT_NAME" \
+-f "$COMPOSE_FILE" --env-file docker/.env \
+pull customer admin
+
+docker compose -p "$PROJECT_NAME" \
+-f "$COMPOSE_FILE" --env-file docker/.env \
+up -d --remove-orphans customer admin
 
 echo "Waiting for customer on :4200..."
 for i in $(seq 1 30); do
