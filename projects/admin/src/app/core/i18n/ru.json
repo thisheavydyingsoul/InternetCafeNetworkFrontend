@@ -1,0 +1,17 @@
+{
+  "auth.login.title": "Вход для администратора",
+  "auth.login.subtitle": "Используйте Google-аккаунт, привязанный к этой системе.",
+  "auth.login.loading": "Вход...",
+  "auth.login.googleUnavailable": "Не удалось выполнить вход с помощью Google. Проверьте сеть.",
+  "auth.logout": "Выход",
+  "auth.errors.generic": "Не удалось войти. Попробуйте снова.",
+  "auth.errors.emailNotVerified": "Email Google не подтвержден.",
+  "auth.errors.googleTokenInvalid": "Вход с поомощью Google недействителен или истёк.",
+  "auth.errors.adminNotFound": "Для этого email нет действующего администратора.",
+  "auth.errors.adminInactive": "Учётная запись администратора не действительна.",
+  "auth.errors.googleSubMismatch": "Этот Google-аккаунт не совпадает с зарегистрированным администратором.",
+  "auth.errors.sessionExpired": "Сессия истекла, войдите снова",
+  "auth.errors.validation": "Некорректный запрос.",
+  "auth.errors.accessDenied": "Доступ запрещён.",
+  "common.language": "Язык"
+}

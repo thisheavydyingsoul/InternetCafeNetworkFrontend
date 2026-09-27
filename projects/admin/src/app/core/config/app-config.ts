@@ -2,5 +2,7 @@ import { environment } from "../../../environments/environment";
 
 export const appConfig = {
   apiBaseUrl: environment.apiBaseUrl,
-  appName: environment.appName
+  appName: environment.appName,
+  googleClientId: environment.googleClientId,
+  i18n: environment.i18n,
 }
