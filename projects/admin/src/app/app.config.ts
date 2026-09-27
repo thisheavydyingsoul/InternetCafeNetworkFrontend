@@ -1,9 +1,12 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { authInterceptor } from "./core/auth/auth.interceptor";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
+import {AuthService} from "./core/auth/auth.service";
+import {firstValueFrom} from "rxjs";
+import {I18nService} from "./core/i18n/i18n.service";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,9 +14,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
-    provideAppInitializer(() => {
+    provideAppInitializer(async () => {
+      const i18n = inject(I18nService);
       const auth = inject(AuthService);
-      return firstValueFrom(auth.loadMe());
-    })
+      await i18n.init();
+      await firstValueFrom(auth.loadMe());
+    }),
   ]
 };

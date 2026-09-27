@@ -26,6 +26,11 @@ export class TokenStorageService {
     sessionStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
   }
 
+  clear(): void {
+    sessionStorage.removeItem(ACCESS_KEY);
+    sessionStorage.removeItem(REFRESH_KEY);
+    sessionStorage.removeItem(PROFILE_KEY);
+  }
   hasAccessToken() : boolean {
     return !!this.getAccessToken();
   }

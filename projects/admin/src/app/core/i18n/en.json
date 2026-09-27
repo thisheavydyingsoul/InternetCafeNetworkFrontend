@@ -1,0 +1,17 @@
+{
+  "auth.login.title": "Administrator sign in",
+  "auth.login.subtitle": "Use your Google account authorized for this system.",
+  "auth.login.loading": "Signing in...",
+  "auth.login.googleUnavailable": "Google Sign-In failed to load. Check your network.",
+  "auth.logout": "Log out",
+  "auth.errors.generic": "Sign-in failed. Please, try again.",
+  "auth.errors.emailNotVerified": "Your Google email is not verified.",
+  "auth.errors.googleTokenInvalid": "Google sign-in invalid or expired.",
+  "auth.errors.adminNotFound": "No active administrator is registered for this email.",
+  "auth.errors.adminInactive": "This administrator account is inactive.",
+  "auth.errors.googleSubMismatch": "This Google account does not match the registered administrator.",
+  "auth.errors.sessionExpired": "Your session expired. Please sign-in again",
+  "auth.errors.validation": "Invalid request.",
+  "auth.errors.accessDenied": "Access denied.",
+  "common.language": "Language"
+}
