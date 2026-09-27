@@ -27,6 +27,8 @@ export class AuthService {
 
   private readonly currentUser = signal<AdminProfile | null>(this.tokens.getProfile());
 
+  user = this.currentUser.asReadonly();
+  
   isAuthenticated(): boolean {
     return this.tokens.hasAccessToken();
   }
