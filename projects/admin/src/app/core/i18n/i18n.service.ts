@@ -1,8 +1,8 @@
 import {computed, inject, Injectable, signal} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {AppLocale} from "./i18n.models";
-import {appConfig} from "../../app.config";
 import {firstValueFrom} from "rxjs";
+import {appConfig} from "../config/app-config";
 
 @Injectable({ providedIn: "root" })
 export class I18nService {
