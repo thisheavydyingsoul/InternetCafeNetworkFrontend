@@ -38,7 +38,7 @@
       "validation": "Invalid request.",
       "accessDenied": "Access denied.",
       "passwordResetTokenInvalid": "This reset link is invalid or has expired."
-    },
+    }
   },
   "common.language": "Language"
 }
