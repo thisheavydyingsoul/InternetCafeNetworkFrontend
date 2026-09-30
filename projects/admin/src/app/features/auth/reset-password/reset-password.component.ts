@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
@@ -76,6 +76,14 @@ export class ResetPasswordComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly auth = inject(AuthService);
   private readonly i18n = inject(I18nService);
+
+  private token = "";
+
+  readonly validating = signal(true);
+  readonly loading = signal(false);
+  readonly tokenInvalid = signal(false);
+  readonly done = signal(false);
+  readonly error = signal<string | null>(null);
 
   readonly form = this.fb.nonNullable.group(
     {
