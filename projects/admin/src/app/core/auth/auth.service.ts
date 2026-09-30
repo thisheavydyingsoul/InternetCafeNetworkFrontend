@@ -93,7 +93,7 @@ export class AuthService {
 
   validatePasswordResetToken(token: string): Observable<void> {
     return this.http
-      .get<void(`${appConfig.apiBaseUrl}/auth/admin/password-reset/validate`, {
+      .get<void>(`${appConfig.apiBaseUrl}/auth/admin/password-reset/validate`, {
         params: { token },
     })
       .pipe(map(() => undefined));
