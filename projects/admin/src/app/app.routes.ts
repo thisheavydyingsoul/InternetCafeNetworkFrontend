@@ -13,6 +13,24 @@ export const routes: Routes = [
       ),
     title: 'Admin login',
   },
+  {
+    path: 'forgot-password',
+    canActivate: [guestGuard],
+    loadComponent: () =>
+      import("./features/auth/forgot-password/forgot-password.component").then(
+        (m) => m.ForgotPasswordComponent,
+      ),
+    title: 'Forgot password',
+  },
+  {
+    path: 'reset-password',
+    canActivate: [guestGuard],
+    loadComponent: () =>
+      import("./features/auth/reset-password/reset-password.component").then(
+        (m) => m.ResetPasswordComponent,
+      ),
+    title: 'Reset password'
+  },
 
   {
     path: '',

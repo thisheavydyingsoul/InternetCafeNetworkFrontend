@@ -7,6 +7,7 @@ import {AdminProfile, ApiErrorBody, AuthResponse} from "./auth.models";
 import {catchError, finalize, map, Observable, of, tap, throwError} from "rxjs";
 import {authErrorI18nKey} from "./auth-error.mapper";
 import {appConfig} from "../config/app-config";
+import { passwordResetErrorI18nKey } from "./password-reset-error.mapper"
 
 export interface AdminUser {
   id: string;
@@ -28,7 +29,7 @@ export class AuthService {
   private readonly currentUser = signal<AdminProfile | null>(this.tokens.getProfile());
 
   user = this.currentUser.asReadonly();
-  
+
   isAuthenticated(): boolean {
     return this.tokens.hasAccessToken();
   }
@@ -82,6 +83,35 @@ export class AuthService {
         tap((res) => this.applyAuthResponse(res)),
         map(() => undefined),
       );
+  }
+
+  requestPasswordReset(email: string): Observable<void> {
+    return this.http
+      .post<void>(`${appConfig.apiBaseUrl}/auth/admin/password-reset/forgot`, { email })
+      .pipe(map(() => undefined));
+  }
+
+  validatePasswordResetToken(token: string): Observable<void> {
+    return this.http
+      .get<void(`${appConfig.apiBaseUrl}/auth/admin/password-reset/validate`, {
+        params: { token },
+    })
+      .pipe(map(() => undefined));
+  }
+
+  confirmPasswordReset(token: string, newPassword: string): Observable<void> {
+    return this.http
+      .post<void>(`${appConfig.apiBaseUrl}/auth/admin/password-reset/confirm`, {
+        token,
+        newPassword,
+      })
+      .pipe(map(() => undefined));
+  }
+
+  translatePasswordResetError(err: HttpErrorResponse): string {
+    const body = err.error as ApiErrorBody | undefined;
+    const key = passwordResetErrorI18nKey(body);
+    return this.i18n.t(key);
   }
 
   logOut(): Observable<void> {

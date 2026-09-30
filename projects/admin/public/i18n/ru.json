@@ -1,17 +1,44 @@
 {
-  "auth.login.title": "Вход для администратора",
-  "auth.login.subtitle": "Используйте Google-аккаунт, привязанный к этой системе.",
-  "auth.login.loading": "Вход...",
-  "auth.login.googleUnavailable": "Не удалось выполнить вход с помощью Google. Проверьте сеть.",
-  "auth.logout": "Выход",
-  "auth.errors.generic": "Не удалось войти. Попробуйте снова.",
-  "auth.errors.emailNotVerified": "Email Google не подтвержден.",
-  "auth.errors.googleTokenInvalid": "Вход с поомощью Google недействителен или истёк.",
-  "auth.errors.adminNotFound": "Для этого email нет действующего администратора.",
-  "auth.errors.adminInactive": "Учётная запись администратора не действительна.",
-  "auth.errors.googleSubMismatch": "Этот Google-аккаунт не совпадает с зарегистрированным администратором.",
-  "auth.errors.sessionExpired": "Сессия истекла, войдите снова",
-  "auth.errors.validation": "Некорректный запрос.",
-  "auth.errors.accessDenied": "Доступ запрещён.",
+  "auth": {
+    "login": {
+      "title": "Вход для администратора",
+      "subtitle": "Используйте Google-аккаунт, привязанный к этой системе.",
+      "loading": "Вход...",
+      "googleUnavailable": "Не удалось выполнить вход с помощью Google. Проверьте сеть.",
+      "forgotPassword": "Забыли пароль?"
+    },
+    "forgot": {
+      "title": "Восстановить пароль",
+      "subtitle": "Введите адрес email, привязанный к вашему аккаунту администратора. Если он есть в системе, мы отправим ссылку на восстановление пароля.",
+      "emailLabel": "Email",
+      "submit": "Отправить ссылку",
+      "success": "Если для данного email адреса есть учетная запись, мы отправили ссылку на восстановление пароля. Проверьте почту.",
+      "backToLogin": "Вернуться ко входу"
+    },
+    "reset": {
+      "title": "Новый пароль",
+      "subtitle": "Задайте новый пароль для учетной записи администратора.",
+      "newPasswordLabel": "Новый пароль",
+      "confirmPasswordLabel": "Подтвердите пароль",
+      "submit": "Сохранить пароль",
+      "invalidTitle": "Ссылка недействительна",
+      "invalidSubtitle": "Срок действия ссылки истёк или она уже была использована. Запросите новую ссылку.",
+      "doneTitle": "Пароль обновлён",
+      "doneSubtitle": "Пароль был успешно обновлён."
+    },
+    "logout": "Выход",
+    "errors": {
+      "generic": "Не удалось войти. Попробуйте снова.",
+      "emailNotVerified": "Email Google не подтвержден.",
+      "googleTokenInvalid": "Вход с поомощью Google недействителен или истёк.",
+      "adminNotFound": "Для этого email нет действующего администратора.",
+      "adminInactive": "Учётная запись администратора не действительна.",
+      "googleSubMismatch": "Этот Google-аккаунт не совпадает с зарегистрированным администратором.",
+      "sessionExpired": "Сессия истекла, войдите снова",
+      "validation": "Некорректный запрос.",
+      "accessDenied": "Доступ запрещён.",
+      "passwordResetTokenInvalid": "Данная ссылка для восстановления пароля недействительна или срок ее действия истёк"
+    }
+  },
   "common.language": "Язык"
 }
