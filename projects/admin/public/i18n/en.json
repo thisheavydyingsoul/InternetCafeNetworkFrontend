@@ -1,17 +1,44 @@
 {
-  "auth.login.title": "Administrator sign in",
-  "auth.login.subtitle": "Use your Google account authorized for this system.",
-  "auth.login.loading": "Signing in...",
-  "auth.login.googleUnavailable": "Google Sign-In failed to load. Check your network.",
-  "auth.logout": "Log out",
-  "auth.errors.generic": "Sign-in failed. Please, try again.",
-  "auth.errors.emailNotVerified": "Your Google email is not verified.",
-  "auth.errors.googleTokenInvalid": "Google sign-in invalid or expired.",
-  "auth.errors.adminNotFound": "No active administrator is registered for this email.",
-  "auth.errors.adminInactive": "This administrator account is inactive.",
-  "auth.errors.googleSubMismatch": "This Google account does not match the registered administrator.",
-  "auth.errors.sessionExpired": "Your session expired. Please sign-in again",
-  "auth.errors.validation": "Invalid request.",
-  "auth.errors.accessDenied": "Access denied.",
+  "auth": {
+    "login": {
+      "title": "Administrator sign in",
+      "subtitle": "Use your Google account authorized for this system.",
+      "loading": "Signing in...",
+      "googleUnavailable": "Google Sign-In failed to load. Check your network.",
+      "forgotPassword": "Forgot password?"
+    },
+    "forgot": {
+      "title": "Reset password",
+      "subtitle": "Enter the email address registered for your administrator account. If it exists, we will send the reset link.",
+      "emailLabel": "Email",
+      "submit": "Send reset link",
+      "success": "If an account exists for that email, we sent a link to reset your password. Check your inbox",
+      "backToLogin": "Back to sign in"
+    },
+    "reset": {
+      "title": "Choose a new password",
+      "subtitle": "Enter a new password for your administrator account.",
+      "newPasswordLabel": "New password",
+      "confirmPasswordLabel": "Confirm password",
+      "submit": "Save password",
+      "invalidTitle": "Link expired or invalid",
+      "invalidSubtitle": "This reset link is no longer valid. Request a new one.",
+      "doneTitle": "Password updated",
+      "doneSubtitle": "Password was successfully updated"
+    },
+    "logout": "Log out",
+    "errors": {
+      "generic": "Sign-in failed. Please, try again.",
+      "emailNotVerified": "Your Google email is not verified.",
+      "googleTokenInvalid": "Google sign-in invalid or expired.",
+      "adminNotFound": "No active administrator is registered for this email.",
+      "adminInactive": "This administrator account is inactive.",
+      "googleSubMismatch": "This Google account does not match the registered administrator.",
+      "sessionExpired": "Your session expired. Please sign-in again",
+      "validation": "Invalid request.",
+      "accessDenied": "Access denied.",
+      "passwordResetTokenInvalid": "This reset link is invalid or has expired."
+    },
+  },
   "common.language": "Language"
 }

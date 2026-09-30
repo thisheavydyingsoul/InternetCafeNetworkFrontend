@@ -8,8 +8,8 @@ const CODE_TO_KEY: Record<string, string> = {
   GOOGLE_SUB_MISMATCH: "auth.errors.googleSubMismatch",
   INVALID_TOKEN: "auth.errors.sessionExpired",
   INVALID_REFRESH: "auth.errors.sessionExpired",
-  VALIDATION_ERROR: "auth.error.validation",
-  ACCESS_DENIED: "auth.error.accessDenied"
+  VALIDATION_ERROR: "auth.errors.validation",
+  ACCESS_DENIED: "auth.errors.accessDenied"
 };
 
 export function authErrorI18nKey(body: ApiErrorBody | null | undefined): string {

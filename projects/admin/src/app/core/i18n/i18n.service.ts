@@ -40,12 +40,37 @@ export class I18nService {
   }
 
   async setLocale(locale: AppLocale) : Promise<void> {
-    const dict = await firstValueFrom(
-      this.http.get<Record<string, string>>(`/i18n/${locale}.json`),
+    const nested = await firstValueFrom(
+      this.http.get<Record<string, unknown>>(`/i18n/${locale}.json`)
     );
-    this.dictSignal.set(dict);
+    this.dictSignal.set(this.flatten(nested));
     this.localeSignal.set(locale);
     localStorage.setItem(appConfig.i18n.storageKey, locale);
     document.documentElement.lang = locale;
+  }
+
+  private flatten(
+    source: Record<string, unknown>,
+    prefix=""
+  ): Record<string,string> {
+    const result: Record<string, string> = {};
+
+    for (const [key, value] of Object.entries(source)) {
+      const fullKey = prefix ? `${prefix}.${key}` : key;
+
+      if (typeof value === "string") {
+        result[fullKey] = value;
+      } else if (value !== null && typeof value === "object" &&
+      !Array.isArray(value)) {
+        Object.assign(
+          result,
+          this.flatten(value as Record<string, unknown>, fullKey)
+        );
+      } else {
+        throw new Error(`Invalid translation value: ${fullKey}`);
+      }
+    }
+
+    return result;
   }
 }

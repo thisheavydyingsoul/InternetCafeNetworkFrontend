@@ -1,48 +1,42 @@
-import {AfterViewInit, Component, ElementRef, inject, signal, ViewChild} from "@angular/core";
+import {AfterViewInit, effect, Component, ElementRef, inject, signal, ViewChild} from "@angular/core";
 import {TranslatePipe} from "../../../core/i18n/translate.pipe";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {LanguageSwitcherComponent} from "../../../shared/language-switcher/language-switcher.component";
 import {AuthService} from "../../../core/auth/auth.service";
-import {Router} from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import {I18nService} from "../../../core/i18n/i18n.service";
 import {appConfig} from "../../../core/config/app-config";
 
 @Component({
-  selector: 'admin-login',
+  selector: "admin-login",
   standalone: true,
-  imports: [TranslatePipe, MatProgressSpinnerModule, LanguageSwitcherComponent],
+  imports: [
+    TranslatePipe,
+    MatProgressSpinnerModule,
+    RouterLink,
+  ],
+  styleUrl: "../../../styles/card-styles.scss",
   template: `
-    <div class="login-card">
-        <admin-language-switcher (localeChange)="renderGoogleButton()" />
+    <div class="card">
+      <h1>{{ "auth.login.title" | translate }}</h1>
+      <p>{{ "auth.login.subtitle" | translate }}</p>
 
-        <h1>{{ "auth.login.title" | translate }}</h1>
-        <p>{{ "auth.login.subtitle" | translate }}</p>
+      <a routerLink="/forgot-password">
+        {{ "auth.login.forgotPassword" | translate }}</a
+      >
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
 
-        @if (error()) {
-          <p class="error" role="alert">{{ error() }}</p>
-        }
+      @if (loading()) {
+        <mat-spinner diameter="40" />
+        <p>{{ "auth.login.loading" | translate }}</p>
+      }
 
-        @if (loading()) {
-          <mat-spinner diameter="40" />
-          <p>{{ "auth.login.loading" | translate }}</p>
-        }
-
-        <div #googleBtn class="google-btn-host"></div>
+      <div #googleBtn class="google-btn-host"></div>
     </div>
   `,
   styles: [
     `
-      .login-card {
-        max-width: 420px;
-        margin: 4rem auto;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .error {
-        color: #b00020;
-      }
       .google-btn-host {
         min-height: 44px;
       }
@@ -59,13 +53,22 @@ export class LoginComponent implements AfterViewInit {
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
 
+  constructor() {
+    effect(() => {
+      this.i18n.locale();
+      if (this.googleBtn) {
+        this.renderGoogleButton();
+      }
+    });
+  }
+
   ngAfterViewInit(): void {
     this.renderGoogleButton();
   }
 
   renderGoogleButton(): void {
     this.googleBtn.nativeElement.innerHTML = "";
-    if(typeof google === "undefined" || !google.accounts?.id) {
+    if (typeof google === "undefined" || !google.accounts?.id) {
       this.error.set(this.i18n.t("auth.login.googleUnavailable"));
       return;
     }
@@ -94,7 +97,9 @@ export class LoginComponent implements AfterViewInit {
       },
       error: (msg: string) => {
         this.loading.set(false);
-        this.error.set(typeof msg === "string" ? msg : this.i18n.t("auth.errors.generic"));
+        this.error.set(
+          typeof msg === "string" ? msg : this.i18n.t("auth.errors.generic"),
+        );
       },
     });
   }
